@@ -736,7 +736,7 @@ body.dark-mode .strengths-list li, body.dark-mode .limitations-list li {
 }
 
 /* Charts Section */
-.charts-grid {
+.charts-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     gap: 30px;
@@ -752,6 +752,10 @@ body.dark-mode .strengths-list li, body.dark-mode .limitations-list li {
     border: 2px solid #f0f0f0;
     overflow: hidden;
     position: relative;
+}
+
+.chart-full-width {
+    grid-column: 1 / -1;
 }
 
 body.dark-mode .chart-card {
@@ -797,12 +801,24 @@ body.dark-mode .chart-card {
 .chart-description {
     color: #666;
     font-size: 0.95em;
-    margin-bottom: 12px;
-    font-weight: 500;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
 body.dark-mode .chart-description {
     color: var(--text-dark);
+}
+
+.chart-detail {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+body.dark-mode .chart-detail {
+    color: #bbb;
 }
 
 .chart-list {
@@ -1075,6 +1091,15 @@ footer p {
         height: 35px;
         font-size: 0.95em;
     }
+
+    .charts-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .chart-full-width {
+        grid-column: 1 / -1;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1124,6 +1149,18 @@ footer p {
     }
 
     .strengths-box, .limitations-box, .recommendations-box {
+        padding: 15px;
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-full-width {
+        grid-column: 1;
+    }
+
+    .chart-card {
         padding: 15px;
     }
 }

@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.DS_Store
+.env
+.vscode/
+.idea/
+
+# IDE
+authors/**
+
+# Recommended image outputs source control — you can keep or remove depending on preference
+images/
