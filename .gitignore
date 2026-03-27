@@ -11,5 +11,6 @@ __pycache__/
 # IDE
 authors/**
 
-# Recommended image outputs source control — you can keep or remove depending on preference
-images/
+# Keep generated images in repo so GitHub Pages can serve them
+# if you prefer not to commit these files, remove this line and run generate_charts.py locally before deployment.
+#images/
