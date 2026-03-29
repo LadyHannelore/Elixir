@@ -94,6 +94,41 @@ body.dark-mode {
     transform: scale(0.95);
 }
 
+/* Breadcrumb list (semantic refactor) */
+.breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 12px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.breadcrumb-list li {
+    font-size: 0.88em;
+}
+
+.breadcrumb-list li + li::before {
+    content: '/';
+    color: #cccccc;
+    margin: 0 6px;
+}
+
+.breadcrumb-list a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+.breadcrumb-list a:hover,
+.breadcrumb-list a:focus-visible {
+    background: rgba(102, 126, 234, 0.2);
+    color: var(--secondary-color);
+}
+
 /* Back to Top Button */
 .back-to-top {
     position: fixed;

@@ -1,8 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from matplotlib.patches import Rectangle, FancyBboxPatch, Circle, Wedge
+from matplotlib.patches import FancyBboxPatch, Circle
 import numpy as np
-import pandas as pd
 import os
 
 # Create images directory if it doesn't exist
@@ -40,29 +39,34 @@ colors = ['#3498db', '#2ecc71', '#f39c12', '#e74c3c', '#9b59b6']
 # Draw events
 for i, (year, label, phase) in enumerate(zip(years, labels, phases)):
     # Draw marker
-    circle = Circle((year, 0), 0.3, color=colors[i], ec='black', linewidth=2.5, zorder=5)
+    circle = Circle((year, 0), 0.3, color=colors[i], ec='black',
+                    linewidth=2.5, zorder=5)
     ax.add_patch(circle)
-    
+
     # Add vertical line
     y_pos = 3 if i % 2 == 0 else -3
     ax.plot([year, year], [0.3, y_pos], 'k--', alpha=0.3, linewidth=1.5)
-    
+
     # Add text box with description
-    bbox_props = dict(boxstyle="round,pad=0.5", facecolor=colors[i], alpha=0.85, 
-                      edgecolor='black', linewidth=2)
-    ax.text(year, y_pos, label, ha='center', va='center' if i % 2 == 0 else 'center',
-            fontsize=10, fontweight='bold', color='white', bbox=bbox_props)
-    
+    bbox_props = dict(boxstyle="round,pad=0.5", facecolor=colors[i],
+                      alpha=0.85, edgecolor='black', linewidth=2)
+    ax.text(year, y_pos, label, ha='center',
+            va='center' if i % 2 == 0 else 'center',
+            fontsize=10, fontweight='bold', color='white',
+            bbox=bbox_props)
+
     # Add year label
-    ax.text(year, 0.8, str(year), ha='center', va='bottom', fontsize=11, fontweight='bold')
+    ax.text(year, 0.8, str(year), ha='center', va='bottom',
+            fontsize=11, fontweight='bold')
 
 # Add phase progression line
-ax.plot(years, phases, 'o--', color='#667eea', linewidth=3, markersize=10, alpha=0.6, zorder=3)
+ax.plot(years, phases, 'o--', color='#667eea', linewidth=3,
+        markersize=10, alpha=0.6, zorder=3)
 
 ax.set_xlim(1990, 2010)
 ax.set_ylim(-4.5, 5.5)
 ax.set_xlabel('Year', fontsize=12, fontweight='bold')
-ax.set_title('The Elixir Evolution Timeline: 15 Years of Strategic Pivots', 
+ax.set_title('The Elixir Evolution Timeline: 15 Years of Strategic Pivots',
              fontsize=14, fontweight='bold', pad=20)
 
 # Remove spines
@@ -80,10 +84,12 @@ legend_elements = [
     mpatches.Patch(color='#e74c3c', label='Crisis & Evolution'),
     mpatches.Patch(color='#9b59b6', label='Enterprise Focus')
 ]
-ax.legend(handles=legend_elements, loc='upper left', fontsize=10, framealpha=0.95)
+ax.legend(handles=legend_elements, loc='upper left', fontsize=10,
+          framealpha=0.95)
 
 plt.tight_layout()
-plt.savefig('images/01_elixir_evolution_timeline.png', dpi=300, bbox_inches='tight', facecolor='white')
+plt.savefig('images/01_elixir_evolution_timeline.png', dpi=300,
+            bbox_inches='tight', facecolor='white')
 plt.close()
 
 # ============================================================================
@@ -93,23 +99,29 @@ fig, ax = plt.subplots(figsize=(12, 9))
 
 # Create concentric circles for Venn diagram effect
 circle_colors = ['#3498db', '#2ecc71', '#f39c12']
-circle_labels = ['Boundary\nOpenness', 'Organizational\nAdaptability', 'Balanced\nAmbidexterity']
+circle_labels = ['Boundary\nOpenness', 'Organizational\nAdaptability',
+                 'Balanced\nAmbidexterity']
 circle_positions = [(0.35, 0.6), (0.65, 0.6), (0.5, 0.35)]
 circle_radius = 0.18
 
-for i, (pos, color, label) in enumerate(zip(circle_positions, circle_colors, circle_labels)):
-    circle = Circle(pos, circle_radius, color=color, alpha=0.6, edgecolor='black', linewidth=2)
+for i, (pos, color, label) in enumerate(
+    zip(circle_positions, circle_colors, circle_labels)
+):
+    circle = Circle(pos, circle_radius, color=color, alpha=0.6,
+                    edgecolor='black', linewidth=2)
     ax.add_patch(circle)
-    ax.text(pos[0], pos[1], label, ha='center', va='center', fontsize=11, 
+    ax.text(pos[0], pos[1], label, ha='center', va='center', fontsize=11,
             fontweight='bold', color='white')
 
 # Add Financial Prudence at the base
-financial_box = FancyBboxPatch((0.35, 0.05), 0.3, 0.12, boxstyle="round,pad=0.01",
-                               edgecolor='black', facecolor='#e74c3c', 
+financial_box = FancyBboxPatch((0.35, 0.05), 0.3, 0.12,
+                               boxstyle="round,pad=0.01",
+                               edgecolor='black', facecolor='#e74c3c',
                                linewidth=2.5, alpha=0.85)
 ax.add_patch(financial_box)
-ax.text(0.5, 0.11, 'Financial Prudence\n(Risk Buffering Foundation)', 
-        ha='center', va='center', fontsize=10, fontweight='bold', color='white')
+ax.text(0.5, 0.11, 'Financial Prudence\n(Risk Buffering Foundation)',
+        ha='center', va='center', fontsize=10, fontweight='bold',
+        color='white')
 
 # Add connecting lines
 ax.plot([0.5, 0.5], [0.17, 0.25], 'k--', linewidth=2, alpha=0.5)
@@ -117,16 +129,19 @@ ax.plot([0.5, 0.5], [0.17, 0.25], 'k--', linewidth=2, alpha=0.5)
 # Add labels and descriptions
 descriptions = [
     ('Boundary Openness', 'External market scanning\nand trend awareness'),
-    ('Organizational Adaptability', 'Quick decision-making\nand rapid reconfiguration'),
-    ('Balanced Ambidexterity', 'Exploration of new opportunities\nwhile exploiting existing strengths'),
-    ('Financial Prudence', 'Risk buffering and strategic runway\nfor agile experimentation')
+    ('Organizational Adaptability',
+     'Quick decision-making\nand rapid reconfiguration'),
+    ('Balanced Ambidexterity',
+     'Exploration of new opportunities\nwhile exploiting existing strengths'),
+    ('Financial Prudence',
+     'Risk buffering and strategic runway\nfor agile experimentation')
 ]
 
 description_positions = [(0.08, 0.75), (0.92, 0.75), (0.5, 0.85), (0.5, -0.05)]
 for (title, desc), pos in zip(descriptions, description_positions):
     if pos[1] > 0.5:
-        ax.text(pos[0], pos[1], f'{title}\n{desc}', ha='center', va='top', 
-                fontsize=9, style='italic', bbox=dict(boxstyle='round', 
+        ax.text(pos[0], pos[1], f'{title}\n{desc}', ha='center', va='top',
+                fontsize=9, style='italic', bbox=dict(boxstyle='round',
                 facecolor='lightyellow', alpha=0.7))
 
 ax.set_xlim(0, 1)
@@ -134,11 +149,13 @@ ax.set_ylim(-0.1, 1)
 ax.set_aspect('equal')
 ax.axis('off')
 
-ax.text(0.5, 0.98, 'The Resilience & Agility Framework:\nInterconnected Mechanisms', 
+ax.text(0.5, 0.98,
+        'The Resilience & Agility Framework:\nInterconnected Mechanisms',
         ha='center', va='top', fontsize=14, fontweight='bold')
 
 plt.tight_layout()
-plt.savefig('images/02_resilience_agility_framework.png', dpi=300, bbox_inches='tight', facecolor='white')
+plt.savefig('images/02_resilience_agility_framework.png', dpi=300,
+            bbox_inches='tight', facecolor='white')
 plt.close()
 
 # ============================================================================
@@ -152,16 +169,21 @@ sectors = ['Government', 'Banking', 'Healthcare', 'Other\nSectors']
 sector_sizes = [30, 35, 25, 10]
 colors_sectors = ['#3498db', '#2ecc71', '#f39c12', '#95a5a6']
 
-wedges, texts, autotexts = ax1.pie(sector_sizes, labels=sectors, colors=colors_sectors,
-                                    autopct='%1.0f%%', startangle=90, 
-                                    textprops={'fontsize': 11, 'fontweight': 'bold'})
+wedges, texts, autotexts = ax1.pie(sector_sizes, labels=sectors,
+                                   colors=colors_sectors,
+                                   autopct='%1.0f%%', startangle=90,
+                                   textprops={'fontsize': 11,
+                                              'fontweight': 'bold'})
 
 # Create donut effect
-centre_circle = Circle((0, 0), 0.70, fc='white', edgecolor='black', linewidth=2)
+centre_circle = Circle((0, 0), 0.70, fc='white', edgecolor='black',
+                       linewidth=2)
 ax1.add_artist(centre_circle)
 
-ax1.text(0, 0, 'Sector\nFocus', ha='center', va='center', fontsize=12, fontweight='bold')
-ax1.set_title('Market Sector Diversification', fontsize=12, fontweight='bold', pad=15)
+ax1.text(0, 0, 'Sector\nFocus', ha='center', va='center', fontsize=12,
+         fontweight='bold')
+ax1.set_title('Market Sector Diversification', fontsize=12,
+              fontweight='bold', pad=15)
 
 # Geographic Distribution (Donut)
 ax2 = plt.subplot(1, 2, 2)
@@ -169,22 +191,29 @@ geographies = ['Singapore\n(Local)', 'USA', 'Japan', 'Other\nRegions']
 geo_sizes = [40, 35, 20, 5]
 colors_geo = ['#e74c3c', '#9b59b6', '#1abc9c', '#95a5a6']
 
-wedges, texts, autotexts = ax2.pie(geo_sizes, labels=geographies, colors=colors_geo,
-                                    autopct='%1.0f%%', startangle=90,
-                                    textprops={'fontsize': 11, 'fontweight': 'bold'})
+wedges, texts, autotexts = ax2.pie(geo_sizes, labels=geographies,
+                                   colors=colors_geo,
+                                   autopct='%1.0f%%', startangle=90,
+                                   textprops={'fontsize': 11,
+                                              'fontweight': 'bold'})
 
 # Create donut effect
-centre_circle = Circle((0, 0), 0.70, fc='white', edgecolor='black', linewidth=2)
+centre_circle = Circle((0, 0), 0.70, fc='white', edgecolor='black',
+                       linewidth=2)
 ax2.add_artist(centre_circle)
 
-ax2.text(0, 0, 'Geographic\nReach', ha='center', va='center', fontsize=12, fontweight='bold')
-ax2.set_title('Geographic Diversification', fontsize=12, fontweight='bold', pad=15)
+ax2.text(0, 0, 'Geographic\nReach', ha='center', va='center', fontsize=12,
+         fontweight='bold')
+ax2.set_title('Geographic Diversification', fontsize=12,
+              fontweight='bold', pad=15)
 
-fig.suptitle('Market Diversification Strategy: Risk Mitigation Through Portfolio Expansion',
+fig.suptitle('Market Diversification Strategy: Risk Mitigation Through '
+             'Portfolio Expansion',
              fontsize=14, fontweight='bold', y=0.98)
 
 plt.tight_layout()
-plt.savefig('images/03_market_diversification.png', dpi=300, bbox_inches='tight', facecolor='white')
+plt.savefig('images/03_market_diversification.png', dpi=300,
+            bbox_inches='tight', facecolor='white')
 plt.close()
 
 # ============================================================================
@@ -228,7 +257,7 @@ swot_data = {
 swot_colors = {
     'Strengths': '#2ecc71',    # Green
     'Weaknesses': '#e74c3c',   # Red
-    'Opportunities': '#3498db', # Blue
+    'Opportunities': '#3498db',  # Blue
     'Threats': '#f39c12'       # Orange
 }
 
@@ -243,19 +272,19 @@ positions = {
 for quadrant, items in swot_data.items():
     x, y, w, h = positions[quadrant]
     color = swot_colors[quadrant]
-    
+
     # Draw rectangle
     rect = FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.01",
-                          edgecolor='black', facecolor=color, 
+                          edgecolor='black', facecolor=color,
                           linewidth=3, alpha=0.15, transform=ax.transAxes)
     ax.add_patch(rect)
-    
+
     # Add title
     ax.text(x + w/2, y + h - 0.03, quadrant, transform=ax.transAxes,
             fontsize=16, fontweight='bold', ha='center', va='top',
-            bbox=dict(boxstyle='round', facecolor=color, alpha=0.9, 
+            bbox=dict(boxstyle='round', facecolor=color, alpha=0.9,
                       edgecolor='black', linewidth=2))
-    
+
     # Add items
     y_offset = y + h - 0.08
     for i, item in enumerate(items):
@@ -270,12 +299,15 @@ fig.text(0.5, 0.98, 'SWOT Analysis: Elixir Technology Strategic Position',
          ha='center', fontsize=15, fontweight='bold')
 
 # Add strategic insights at bottom
-insights = 'Strategic Insight: Elixir\'s strength lies in agility and adaptability. To overcome weaknesses,\ninstitutionalize agile capabilities and explore strategic partnerships for scale.'
+insights = ('Strategic Insight: Elixir\'s strength lies in agility and '
+            'adaptability. To overcome weaknesses,\ninstitutionalize agile '
+            'capabilities and explore strategic partnerships for scale.')
 fig.text(0.5, 0.01, insights, ha='center', fontsize=10, style='italic',
          bbox=dict(boxstyle='round', facecolor='lightyellow', alpha=0.8))
 
 plt.tight_layout(rect=[0, 0.03, 1, 0.96])
-plt.savefig('images/04_swot_analysis.png', dpi=300, bbox_inches='tight', facecolor='white')
+plt.savefig('images/04_swot_analysis.png', dpi=300, bbox_inches='tight',
+            facecolor='white')
 plt.close()
 
 # ============================================================================
@@ -316,22 +348,25 @@ for year, label in milestones:
     ax.text(year, 105, label, ha='center', fontsize=9, fontweight='bold',
             bbox=dict(boxstyle='round', facecolor='white', alpha=0.7))
 
-ax.set_xlabel('Year', fontsize=12, fontweight='bold')
-ax.set_ylabel('Percentage of Company Focus (%)', fontsize=12, fontweight='bold')
+ax.set_ylabel('Percentage of Company Focus (%)', fontsize=12,
+              fontweight='bold')
 ax.set_title('Business Focus Transition: Strategic Pivot Evolution',
              fontsize=14, fontweight='bold', pad=20)
 ax.set_ylim(0, 110)
 ax.set_xlim(1990, 2014)
 
 # Format as percentage
-ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: '{:.0f}%'.format(y)))
+ax.yaxis.set_major_formatter(
+    plt.FuncFormatter(lambda y, _: '{:.0f}%'.format(y))
+)
 
-ax.legend(loc='center left', fontsize=11, framealpha=0.95, edgecolor='black', 
+ax.legend(loc='center left', fontsize=11, framealpha=0.95, edgecolor='black',
           fancybox=True, shadow=True)
 ax.grid(True, alpha=0.3, linestyle=':')
 
 plt.tight_layout()
-plt.savefig('images/05_business_focus_transition.png', dpi=300, bbox_inches='tight', facecolor='white')
+plt.savefig('images/05_business_focus_transition.png', dpi=300,
+            bbox_inches='tight', facecolor='white')
 plt.close()
 
 print("✅ All charts generated successfully!")
