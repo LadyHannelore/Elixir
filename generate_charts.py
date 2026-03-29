@@ -252,15 +252,15 @@ for quadrant, items in swot_data.items():
     
     # Add title
     ax.text(x + w/2, y + h - 0.03, quadrant, transform=ax.transAxes,
-            fontsize=13, fontweight='bold', ha='center', va='top',
-            bbox=dict(boxstyle='round', facecolor=color, alpha=0.8, 
-                     edgecolor='black', linewidth=2))
+            fontsize=16, fontweight='bold', ha='center', va='top',
+            bbox=dict(boxstyle='round', facecolor=color, alpha=0.9, 
+                      edgecolor='black', linewidth=2))
     
     # Add items
     y_offset = y + h - 0.08
     for i, item in enumerate(items):
-        ax.text(x + 0.02, y_offset - (i * 0.08), item, transform=ax.transAxes,
-                fontsize=10, va='top', fontweight='600')
+        ax.text(x + 0.02, y_offset - (i * 0.09), item, transform=ax.transAxes,
+                fontsize=12, va='top', fontweight='600', color='black')
 
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
