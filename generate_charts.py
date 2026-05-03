@@ -1,6 +1,6 @@
+import os
 import matplotlib.pyplot as plt
 import numpy as np
-
 # Set style for a professional business report look
 plt.style.use('seaborn-v0_8-whitegrid')
 
@@ -29,10 +29,15 @@ ax1.set_title('The Digital Disconnect: Online Channel Spend vs. Return',
 ax1.spines['top'].set_visible(False)
 ax1.spines['right'].set_visible(False)
 
-plt.tight_layout()
-plt.savefig('digital_disconnect.png', dpi=300)
-plt.show()
+# Get the folder where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
+# Create an absolute path for the image
+save_path_1 = os.path.join(script_dir, 'digital_disconnect.png')
+
+plt.tight_layout()
+plt.savefig(save_path_1, dpi=300)
+plt.close(fig1)
 # =========================================================
 # Graph 2: AI in Retail Market Growth (2026-2031)
 # =========================================================
@@ -61,10 +66,11 @@ ax2.spines['top'].set_visible(False)
 ax2.spines['right'].set_visible(False)
 ax2.set_xticks(years)
 
-plt.tight_layout()
-plt.savefig('ai_market_growth.png', dpi=300)
-plt.show()
+save_path_2 = os.path.join(script_dir, 'ai_market_growth.png')
 
+plt.tight_layout()
+plt.savefig(save_path_2, dpi=300)
+plt.close(fig2)
 # =========================================================
 # Graph 3: Strategic Alternatives Evaluation Matrix
 # =========================================================
@@ -104,6 +110,8 @@ for i, total in enumerate(totals):
 ax3.spines['top'].set_visible(False)
 ax3.spines['right'].set_visible(False)
 
+save_path_3 = os.path.join(script_dir, 'strategic_matrix.png')
+
 plt.tight_layout()
-plt.savefig('strategic_matrix.png', dpi=300)
-plt.show()
+plt.savefig(save_path_3, dpi=300)
+plt.close(fig3)
